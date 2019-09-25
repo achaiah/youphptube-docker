@@ -15,7 +15,7 @@ RUN cd /var/www/html \
     && rm -f index.html \
     && pip install --upgrade pip \
     && git clone https://github.com/DanielnetoDotCom/YouPHPTube.git . \
-    && pip install -U youtube-dl \
+    && python -m pip install -U youtube-dl \
     && git clone https://github.com/DanielnetoDotCom/YouPHPTube-Encoder.git encoder
    
 # fix permissions
