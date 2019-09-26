@@ -1,6 +1,8 @@
 # YouPHPTube
 
-This is a docker implementation of [YouPHPTube](https://github.com/DanielnetoDotCom/YouPHPTube). It includes the encoder at your.host.name/encoder. Follow the encoder setup [here](https://tutorials.youphptube.com/video/streamer-and-encoder), otherwise you won't be able to upload any of your videos or transcode them.
+This is a docker implementation of [YouPHPTube](https://github.com/DanielnetoDotCom/YouPHPTube). It includes the encoder at your.host.name/encoder. Follow the [encoder setup](https://tutorials.youphptube.com/video/streamer-and-encoder), otherwise you won't be able to upload any of your videos or transcode them.
+
+The prebuilt docker image is conveniently available at [DockerHub](https://hub.docker.com/r/achaiah/youphptube).
 
 ## Database
 
