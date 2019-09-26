@@ -2,7 +2,7 @@ FROM ubuntu:xenial
 
 MAINTAINER furiousgeorge <furiousgeorgecode@gmail.com>
 
-ENV INSTALL_LIST apache2 php7.2 libapache2-mod-php7.2 php7.2-mbstring php7.2-mysql php7.2-curl php7.2-gd php7.2-intl php7.2-xml ffmpeg libimage-exiftool-perl python git curl python-pip wget zip  libb$
+ENV INSTALL_LIST apache2 php7.2 libapache2-mod-php7.2 php7.2-mbstring php7.2-mysql php7.2-curl php7.2-gd php7.2-intl php7.2-xml ffmpeg libimage-exiftool-perl python git curl python-pip wget zip libbz2-dev libmemcached-dev libsasl2-dev libfreetype6-dev libicu-dev libjpeg-dev libmemcachedutil2 libpng-dev libxml2-dev libimage-exiftool-perl
 
 RUN apt-get update && apt-get upgrade
 RUN apt-get install -y software-properties-common python-software-properties
