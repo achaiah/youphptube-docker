@@ -4,10 +4,10 @@ MAINTAINER furiousgeorge <furiousgeorgecode@gmail.com>
 
 ENV INSTALL_LIST apache2 php7.2 libapache2-mod-php7.2 php7.2-mbstring php7.2-mysql php7.2-curl php7.2-gd php7.2-intl php7.2-xml ffmpeg libimage-exiftool-perl python git curl python-pip wget zip  libb$
 
-RUN add-apt-repository ppa:jonathonf/ffmpeg-4
 RUN apt-get update && apt-get upgrade
 RUN apt-get install -y software-properties-common python-software-properties
 RUN LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php
+RUN add-apt-repository -y ppa:jonathonf/ffmpeg-4
 RUN apt-get update \
     && apt-get install -qy $INSTALL_LIST \
     && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/* /root/.cache
