@@ -7,14 +7,13 @@ FROM php:7-apache
 
 MAINTAINER TheAssassin <theassassin@assassinate-you.net>
 
-ENV INSTALL_LIST apt-get install -y nano wget git zip default-libmysqlclient-dev libbz2-dev libmemcached-dev libsasl2-dev libfreetype6-dev libicu-dev libjpeg-dev libmemcachedutil2 libpng-dev libxml2-dev mariadb-client ffmpeg libimage-exiftool-perl python curl python-pip libzip-dev
+ENV INSTALL_LIST nano wget git zip default-libmysqlclient-dev libbz2-dev libmemcached-dev libsasl2-dev libfreetype6-dev libicu-dev libjpeg-dev libmemcachedutil2 libpng-dev libxml2-dev mariadb-client ffmpeg libimage-exiftool-perl python curl python-pip libzip-dev
 
-RUN apt-get update && apt-get upgrade
-RUN apt-get install -y software-properties-common python-software-properties
-RUN LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php
-RUN add-apt-repository -y ppa:jonathonf/ffmpeg-4
-RUN apt-get update \
-    && apt-get install -qy $INSTALL_LIST \
+RUN apt-get update -y && apt-get upgrade -y
+RUN apt-get install -y software-properties-common
+# RUN LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php
+# RUN add-apt-repository -y ppa:jonathonf/ffmpeg-4
+RUN apt-get install -qy $INSTALL_LIST \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include --with-jpeg-dir=/usr/include && \
     docker-php-ext-install -j$(nproc) bcmath bz2 calendar exif gd gettext iconv intl mbstring mysqli opcache pdo_mysql zip && \
     rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/* /root/.cache && \
