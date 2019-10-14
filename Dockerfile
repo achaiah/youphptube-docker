@@ -1,8 +1,13 @@
-FROM ubuntu:xenial
+# Based on the work of @hannah98, thanks for that!
+# https://github.com/hannah98/youphptube-docker
+# Licensed under the terms of the CC-0 license, see
+# https://creativecommons.org/publicdomain/zero/1.0/deed
 
-MAINTAINER furiousgeorge <furiousgeorgecode@gmail.com>
+FROM php:7-apache
 
-ENV INSTALL_LIST apache2 php7.2 libapache2-mod-php7.2 php7.2-mbstring php7.2-mysql php7.2-curl php7.2-gd php7.2-intl php7.2-xml ffmpeg libimage-exiftool-perl python git curl python-pip wget zip libbz2-dev libmemcached-dev libsasl2-dev libfreetype6-dev libicu-dev libjpeg-dev libmemcachedutil2 libpng-dev libxml2-dev libimage-exiftool-perl
+MAINTAINER TheAssassin <theassassin@assassinate-you.net>
+
+ENV INSTALL_LIST apt-get install -y nano wget git zip default-libmysqlclient-dev libbz2-dev libmemcached-dev libsasl2-dev libfreetype6-dev libicu-dev libjpeg-dev libmemcachedutil2 libpng-dev libxml2-dev mariadb-client ffmpeg libimage-exiftool-perl python curl python-pip libzip-dev
 
 RUN apt-get update && apt-get upgrade
 RUN apt-get install -y software-properties-common python-software-properties
@@ -10,16 +15,18 @@ RUN LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php
 RUN add-apt-repository -y ppa:jonathonf/ffmpeg-4
 RUN apt-get update \
     && apt-get install -qy $INSTALL_LIST \
-    && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/* /root/.cache
-RUN a2enmod php7.2 && a2enmod rewrite
+    && docker-php-ext-configure gd --with-freetype-dir=/usr/include --with-jpeg-dir=/usr/include && \
+    docker-php-ext-install -j$(nproc) bcmath bz2 calendar exif gd gettext iconv intl mbstring mysqli opcache pdo_mysql zip && \
+    rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/* /root/.cache && \
+    a2enmod rewrite
+
+RUN echo "post_max_size = 10240M\nupload_max_filesize = 10240M\nallow_url_fopen = On\nallow_url_include = On" >> /usr/local/etc/php/php.ini
 
 WORKDIR /var/www/html
 
 RUN cd /var/www/html \
-    && rm -f index.html \
-    && pip install --upgrade pip \
     && git clone https://github.com/DanielnetoDotCom/YouPHPTube.git . \
-    && python -m pip install -U youtube-dl \
+    && pip install -U youtube-dl \
     && git clone https://github.com/DanielnetoDotCom/YouPHPTube-Encoder.git encoder
 
 # fix permissions
