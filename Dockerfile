@@ -5,8 +5,6 @@
 
 FROM php:7-apache
 
-MAINTAINER TheAssassin <theassassin@assassinate-you.net>
-
 ENV INSTALL_LIST nano wget git zip default-libmysqlclient-dev libbz2-dev libmemcached-dev libsasl2-dev libfreetype6-dev libicu-dev libjpeg-dev libmemcachedutil2 libpng-dev libxml2-dev mariadb-client ffmpeg libimage-exiftool-perl python curl python-pip libzip-dev
 
 RUN apt-get update -y && apt-get upgrade -y
