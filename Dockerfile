@@ -11,8 +11,6 @@ ENV INSTALL_LIST nano wget git zip default-libmysqlclient-dev libbz2-dev libmemc
 
 RUN apt-get update -y && apt-get upgrade -y
 RUN apt-get install -y software-properties-common
-# RUN LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php
-# RUN add-apt-repository -y ppa:jonathonf/ffmpeg-4
 RUN apt-get install -qy $INSTALL_LIST \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include --with-jpeg-dir=/usr/include && \
     docker-php-ext-install -j$(nproc) bcmath bz2 calendar exif gd gettext iconv intl mbstring mysqli opcache pdo_mysql zip && \
