@@ -17,8 +17,8 @@ RUN apt-get install -qy $INSTALL_LIST \
 
 RUN wget https://www.python.org/ftp/python/3.7.4/Python-3.7.4.tgz && tar xzf Python-3.7.4.tgz
 RUN cd Python-3.7.4 && ./configure --enable-optimizations && make altinstall
+RUN apt-get update && apt-get install -y python3-pip
 RUN rm -rf Python-3.7.4*
-RUN apt-get install python3-pip
 
 RUN echo "post_max_size = 10240M\nupload_max_filesize = 10240M\nallow_url_fopen = On\nallow_url_include = On" >> /usr/local/etc/php/php.ini
 
